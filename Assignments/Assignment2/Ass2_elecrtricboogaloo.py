@@ -26,7 +26,9 @@ def trial(tnum, array, lr_choice):
     if lr_choice == 'left':
         for i in range(tnum):
             img = visual.ImageStim(win, random.choice(array), pos=(-200,0), size=(300,300), units="pix")
+            img2 = visual.ImageStim(win, random.choice(array), pos=(200,0), size=(300,300), units="pix")
             img.draw()
+            img2.draw()
             win.flip()
             core.wait(1)
 
@@ -34,7 +36,11 @@ def trial(tnum, array, lr_choice):
         
     elif lr_choice == 'right':
         for i in range(tnum):
-            img = visual.ImageStim(win, random.choice(array), pos=(200,0), size=(300,300), units="pix")
+            img = visual.ImageStim(win, 
+                                   random.choice(array), 
+                                   pos=(200,0), 
+                                   size=(300,300), 
+                                   units="pix")
             img.draw()
             win.flip()
             core.wait(1)
