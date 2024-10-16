@@ -36,8 +36,8 @@ kb.clearEvents()
 
 
 # set some necessary variables
-floc_dir = 'C:/Users/Giselle/Documents/python/UNR/fLoc_stimuli'
-#floc_dir = 'C:/Users/gis_r/OneDrive/Documents/Python/Assignment 1/fLoc_stimuli'
+#floc_dir = 'C:/Users/Giselle/Documents/python/UNR/fLoc_stimuli'
+floc_dir = 'C:/Users/gis_r/OneDrive/Documents/Python/Assignment 1/fLoc_stimuli'
 tnum = 10
 lr_locations = [(200,0), (-200,0), (0,0)]
 img_stim = []
