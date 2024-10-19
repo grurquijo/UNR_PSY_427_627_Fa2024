@@ -1,9 +1,6 @@
-
 #%%
-
 # Imports
 import os
-import random
 import psychopy
 import numpy as np
 
@@ -11,12 +8,14 @@ from psychopy import visual, core, event, gui
 from psychopy.hardware import keyboard
 from experiment1_functions import *
 
+
+#%%
 # set keyboard and clear buffer
 kb = keyboard.Keyboard()
 kb.clearEvents()
 
 
-floc_dir = 'C:/Users/gis_r/OneDrive/Documents/Python/Assignment 1/fLoc_stimuli'
+floc_dir = 'C:/Users/gis_r/Documents/Python/Assignment 1/fLoc_stimuli'
 key_list = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
 
@@ -87,4 +86,6 @@ block_pause()
 fid.close()
 win.close()
 core.quit()
+
+
 # %%

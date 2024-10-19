@@ -1,3 +1,4 @@
+
 import os
 import psychopy
 import numpy as np
@@ -52,3 +53,4 @@ def fixation_point(win, color:str):
                               fillColor=(color),
                               pos=(0,0))
     circ_stim.draw()
+
