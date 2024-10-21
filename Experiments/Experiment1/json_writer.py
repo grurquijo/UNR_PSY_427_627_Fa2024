@@ -1,32 +1,39 @@
 # imports
 import os
+import copy
 import json
 import time
 
-DATA_DIR='./Data_Collected/'
 
 
-def does_file_exist(filename:str):
+def open_file(filename:str):
+    with open(filename) as f:
+        load_file = json.load(f)
+    return load_file
+
+
+def write_json(data, filename:str):
+    with open(filename, "w") as f:
+        json.dump(data, f, indent=2)
+
+
+def json_writer(fname,a,b:str,c,col_data):
+    data_dict = {
+                    "Block": a,
+                    "Responses":
+                    {
+                        b:
+                        {
+                            "Key/Response time": [c]
+                        }
+                    }
+                }
     
-    dir_list = os.listdir(DATA_DIR)
+    data_to_write = open_file(fname)
 
-    for f in dir_list:
-        if f == filename:
-            return True
-    
-    return False
+    data_to_write["Responses"][b]["Key/Reponse time"].append([col_data])
 
-def gen_new_filename(x):
-    
-    filename = x
+    write_json(data_to_write, fname)
 
-    if not does_file_exist(filename + "0.json"):
-        return filename + "0.json"
     
-    else:
-        for i in range(100):
-            i += 1
-            if not does_file_exist(filename + str(i) + ".json"):
-                return filename + str(i) + ".json"
-    return False
 
