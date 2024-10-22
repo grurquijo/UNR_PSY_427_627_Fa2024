@@ -9,7 +9,7 @@ from psychopy.hardware import keyboard
 from functions import *
 
 
-
+#%%
 # set keyboard and clear buffer
 keeb = keyboard.Keyboard()
 keeb.clearEvents()
@@ -27,9 +27,6 @@ win = visual.Window(color=(0.5,0.5,0.5),
                     fullscr=fullscr,
                     units='pix',)
 
-##############################################################
-######################### DIALOG BOX #########################
-##############################################################
 
 myDlg = gui.Dlg(title="Experiment 1")
 myDlg.addText('In this experiment, you will see images of faces, places, bodies, objects, and text, along with scrambled images.'
@@ -61,11 +58,21 @@ key_quit = ok_data[1]
 faces = []
 find_files(floc_dir, 'adult', 'child', faces)
 
+faces_trial = [i for i in np.random.choice(faces, size=19)]
+
 places = []
 find_files(floc_dir, 'house', 'corridor', places)
 
+places_trial = [i for i in np.random.choice(places, size=19)]
+
 objects = []
 find_files(floc_dir, 'instrument', 'car', objects)
+
+objects_trial = [i for i in np.random.choice(objects, size=19)]
+
+shuffle = np.hstack((faces_trial, places_trial, objects_trial))
+
+shuffle_trial = [i for i in np.random.choice(shuffle, size=19)]
 
 
 
@@ -73,7 +80,7 @@ find_files(floc_dir, 'instrument', 'car', objects)
 
 fid = open("./Data_Collected/experiment1_data.txt", "a")
 
-trial(win, 1, 5, faces, key_response, key_quit, fid, max_wait)
+trial(win, 1, 20, faces_trial, key_response, key_quit, fid, max_wait)
 
 '''trial(win, 1, 20, faces, key_response, key_quit, fid, max_wait)
 block_pause()
@@ -90,5 +97,7 @@ fid.close()
 win.close()
 core.quit()
 
+
+a# %%
 
 # %%
