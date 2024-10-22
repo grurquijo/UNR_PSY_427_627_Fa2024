@@ -6,16 +6,17 @@ import numpy as np
 
 from psychopy import visual, core, event, gui
 from psychopy.hardware import keyboard
-from experiment1_functions import *
+from functions import *
 
 
-#%%
+
 # set keyboard and clear buffer
-kb = keyboard.Keyboard()
-kb.clearEvents()
+keeb = keyboard.Keyboard()
+keeb.clearEvents()
 
 
-floc_dir = 'C:/Users/gis_r/Documents/Python/Assignment 1/fLoc_stimuli'
+floc_dir = 'C:/Users/Giselle/Documents/python/UNR/fLoc_stimuli'
+#floc_dir = 'C:/Users/gis_r/Documents/Python/Assignment 1/fLoc_stimuli'
 key_list = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
 
@@ -72,14 +73,16 @@ find_files(floc_dir, 'instrument', 'car', objects)
 
 fid = open("./Data_Collected/experiment1_data.txt", "a")
 
-trial(win, 1, 20, faces, key_response, key_quit, fid, max_wait, kb)
+trial(win, 1, 5, faces, key_response, key_quit, fid, max_wait)
+
+'''trial(win, 1, 20, faces, key_response, key_quit, fid, max_wait)
 block_pause()
 
-trial(win, 2, 20, places, key_response, key_quit, fid, max_wait, kb)
+trial(win, 2, 20, places, key_response, key_quit, fid, max_wait)
 block_pause()
 
-trial(win, 3, 20, objects, key_response, key_quit, fid, max_wait, kb)
-block_pause()
+trial(win, 3, 20, objects, key_response, key_quit, fid, max_wait)
+block_pause()'''
 
 
 
