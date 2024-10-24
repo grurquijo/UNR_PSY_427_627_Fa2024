@@ -14,8 +14,8 @@ def find_files(path, opt1, opt2, empty_list):
             if file.startswith(opt1) or file.startswith(opt2):
                 empty_list.append(os.path.join(path, file))
   
-def check_keypress(max_wait,key_r, key_q,f,win):
-    key_out = event.waitKeys(maxWait=max_wait)
+def check_keypress(key_r, key_q,f,win):
+    key_out = event.getKeys()
     if not key_out:
         pass
     elif key_out == key_r:

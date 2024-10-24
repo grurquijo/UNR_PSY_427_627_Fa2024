@@ -1,5 +1,5 @@
 # Run experiment
-
+#%%
 from psychopy import visual, core, event
 import numpy as np
 import pathlib
@@ -12,7 +12,7 @@ deadlinePct = 0.1 # percent of a screen refresh interval by which
 whileLoopDelta = 0.001 # 1 ms
 # to return control in while loops
 
-imageFolder = pathlib.Path('~/Teaching/PSY427_627/datasets/fLoc_stimuli/').expanduser()
+imageFolder = pathlib.Path('C:/Users/gis_r/Documents/Python/Assignment 1/fLoc_stimuli').expanduser()
 subjectNumber = 1
 fullScreen = False # false for debugging, True to run
 screenSize = [500,500] #[1440, 900] # For mac laptop, may need to change for you! 

@@ -23,7 +23,7 @@ block_category_names = sorted(list(block_categories.keys()))
 # Image file location (assumes all images are in same folder, as they 
 # should be if you downloaded and unzipped fLoc from here: 
 # )
-imageFolder = pathlib.Path('~/Teaching/PSY427_627/datasets/fLoc_stimuli/')
+imageFolder = pathlib.Path('C:/Users/gis_r/Documents/Python/Assignment 1/fLoc_stimuli')
 imageFolder = imageFolder.expanduser()
 imageType = 'jpg'
 

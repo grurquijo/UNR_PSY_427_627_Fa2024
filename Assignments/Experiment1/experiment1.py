@@ -9,8 +9,8 @@ from functions import *
 
 
 
-floc_dir = 'C:/Users/Giselle/Documents/python/UNR/fLoc_stimuli'
-#floc_dir = 'C:/Users/gis_r/Documents/Python/Assignment 1/fLoc_stimuli'
+#floc_dir = 'C:/Users/Giselle/Documents/python/UNR/fLoc_stimuli'
+floc_dir = 'C:/Users/gis_r/Documents/Python/Assignment 1/fLoc_stimuli'
 
 fullscr = [800,800] #True
 max_wait = .5
@@ -91,13 +91,13 @@ for i,idx in enumerate (trial_order):
     trial_message = visual.TextStim(win, text='Block '+ str(i+1))
     trial_message.draw()
     win.flip()
-    check_keypress(max_wait=2, key_q=key_quit, f=fid, win=win)
+    check_keypress(key_r=key_response, key_q=key_quit, f=fid, win=win)
     core.wait(2)
     
     message.setText('Reminder: As you watch the images go by, please press your chosen response button as fast as you can if you see a repeated image.') 
     message.draw()
     win.flip()
-    check_keypress(max_wait=4, key_q=key_quit, f=fid, win=win)
+    check_keypress(key_r=key_response,key_q=key_quit, f=fid, win=win)
     core.wait(4.0)
     
     trial(win, i, 20, idx, key_response, key_quit, fid, max_wait)
@@ -110,3 +110,5 @@ win.close()
 core.quit()
 
 
+
+# %%
