@@ -5,99 +5,108 @@ import psychopy
 import numpy as np
 
 from psychopy import visual, core, event, gui
-from psychopy.hardware import keyboard
 from functions import *
 
-
-#%%
-# set keyboard and clear buffer
-keeb = keyboard.Keyboard()
-keeb.clearEvents()
 
 
 floc_dir = 'C:/Users/Giselle/Documents/python/UNR/fLoc_stimuli'
 #floc_dir = 'C:/Users/gis_r/Documents/Python/Assignment 1/fLoc_stimuli'
-key_list = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
 
-
-fullscr = True
+fullscr = [800,800] #True
 max_wait = .5
-method = 'waitKeys'
 win = visual.Window(color=(0.5,0.5,0.5),
                     fullscr=fullscr,
                     units='pix',)
 
 
-myDlg = gui.Dlg(title="Experiment 1")
-myDlg.addText('In this experiment, you will see images of faces, places, bodies, objects, and text, along with scrambled images.'
+exp1_message = visual.TextStim(win, text='In this experiment, you will see images of faces, places, bodies, objects, and text, along with scrambled images.'
                 '\n\nAs you watch the images go by, please press your chosen response button as fast as you can if you see a repeated image.')
-ok_data = myDlg.show()
-
-myDlg = gui.Dlg(title="Experiment 1")
-myDlg.addText('Please choose one key for your responses and a different key to quit the experiment at any time.')
-myDlg.addField(label='Response key:', choices=key_list)
-myDlg.addField(label='Quit key:', choices=key_list)
-ok_data = myDlg.show()
+exp1_message.draw()
+win.flip()
+core.wait(10)
 
 
-# make sure the response and quit keys are not the same. If they >> request them again
-while ok_data[0] == ok_data[1]:
-    myDlg = gui.Dlg(title="Participation Code 3")
-    myDlg.addText('You cannot have your response and quit key be the same. Please choose two different keys.')
-    myDlg.addField(label='Response key:', choices=key_list)
-    myDlg.addField(label='Quit key:', choices=key_list)
-    ok_data = myDlg.show()
+keys_equal = True
 
+while keys_equal:
+    message = visual.TextStim(win, text='Please choose one key for your responses and a different key to quit the experiment at any time.')
 
-# set the response and quit keys
+    message.setAutoDraw(False)
+    message.draw()
+    win.flip()
+    core.wait(4.0)
 
-key_response = ok_data[0]
-key_quit = ok_data[1] 
+    message.setText('Choose a response key.') 
+    message.draw()
+    win.flip()
+    key_response = event.waitKeys(clearEvents=True) 
+
+    message.setText('Choose a quit key.' )
+    message.draw()   
+    win.flip()
+    key_quit = event.waitKeys(clearEvents=True) 
+    
+    if key_response == key_quit:
+        win.flip()
+        pass
+    else:
+        win.flip()
+        keys_equal = False
+
 
 # grab stimuli
 faces = []
 find_files(floc_dir, 'adult', 'child', faces)
 
-faces_trial = [i for i in np.random.choice(faces, size=19)]
+faces_trial = [i for i in np.random.choice(faces, size=40)]
 
 places = []
 find_files(floc_dir, 'house', 'corridor', places)
 
-places_trial = [i for i in np.random.choice(places, size=19)]
+places_trial = [i for i in np.random.choice(places, size=40)]
 
 objects = []
 find_files(floc_dir, 'instrument', 'car', objects)
 
-objects_trial = [i for i in np.random.choice(objects, size=19)]
+objects_trial = [i for i in np.random.choice(objects, size=40)]
 
 shuffle = np.hstack((faces_trial, places_trial, objects_trial))
 
-shuffle_trial = [i for i in np.random.choice(shuffle, size=19)]
+shuffle_trial = [i for i in np.random.choice(shuffle, size=40)]
 
 
 
+trial_order = [faces_trial,faces_trial,
+               places_trial,places_trial,
+               objects_trial,objects_trial,
+               shuffle_trial,shuffle_trial]
+
+np.random.shuffle(trial_order)
 
 
 fid = open("./Data_Collected/experiment1_data.txt", "a")
 
-trial(win, 1, 20, faces_trial, key_response, key_quit, fid, max_wait)
-
-'''trial(win, 1, 20, faces, key_response, key_quit, fid, max_wait)
-block_pause()
-
-trial(win, 2, 20, places, key_response, key_quit, fid, max_wait)
-block_pause()
-
-trial(win, 3, 20, objects, key_response, key_quit, fid, max_wait)
-block_pause()'''
-
-
+for i,idx in enumerate (trial_order):
+    
+    trial_message = visual.TextStim(win, text='Block '+ str(i+1))
+    trial_message.draw()
+    win.flip()
+    check_keypress(max_wait=2, key_q=key_quit, f=fid, win=win)
+    core.wait(2)
+    
+    message.setText('Reminder: As you watch the images go by, please press your chosen response button as fast as you can if you see a repeated image.') 
+    message.draw()
+    win.flip()
+    check_keypress(max_wait=4, key_q=key_quit, f=fid, win=win)
+    core.wait(4.0)
+    
+    trial(win, i, 20, idx, key_response, key_quit, fid, max_wait)
+    
+    win.flip()
+    core.wait(2)
 
 fid.close()
 win.close()
 core.quit()
 
 
-a# %%
-
-# %%

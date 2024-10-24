@@ -1,8 +1,6 @@
-
 import os
 import psychopy
 import numpy as np
-import itertools
 
 from psychopy import visual, core, event, gui
 from psychopy.hardware import keyboard
@@ -15,32 +13,35 @@ def find_files(path, opt1, opt2, empty_list):
         for file in files:
             if file.startswith(opt1) or file.startswith(opt2):
                 empty_list.append(os.path.join(path, file))
-
-
-# circle stim
-def fixation_point(win, color:str):
-    circ_stim = visual.Circle(win, radius=7.5,
-                              units='pix',
-                              fillColor=(color),
-                              pos=(0,0))
-    return circ_stim
-
-
+  
+def check_keypress(max_wait,key_r, key_q,f,win):
+    key_out = event.waitKeys(maxWait=max_wait)
+    if not key_out:
+        pass
+    elif key_out == key_r:
+        f.write('oop')
+    elif key_out == key_q:
+        f.close()
+        win.close()
+        core.quit()
+           
 def trial(win, block_num, tnum, array, key_r, key_q, f, max_wait):
-    kb = keyboard.Keyboard()
-    kb.clearEvents()
     try:
         f.write('\n Block ' + str(block_num) + ':' )
-        imgs_cycled_through = []
+        exp1_clock = core.Clock()
+        imgs_in_trial = []
         for i in range(tnum):
             
             circ_stim = visual.Circle(win, radius=7.5,
                               units='pix',
                               fillColor=('yellow'),
                               pos=(0,0))
+                        
+            rand_img = np.random.choice(array)
+            imgs_in_trial.append(rand_img)
 
             img = visual.ImageStim(win, 
-                                   np.random.choice(array), 
+                                   rand_img, 
                                    pos=(0,0), 
                                    size=(500,500), 
                                    units="pix")
@@ -49,47 +50,37 @@ def trial(win, block_num, tnum, array, key_r, key_q, f, max_wait):
             circ_stim.draw()
 
             win.flip()
-            t1 = core.getTime()
-            key_out = kb.waitKeys(maxWait=max_wait, 
-                                  keyList=(key_r, key_q))
             
-            t2 = core.getTime()
+            exp1_clock.reset(newT=0.0)
+            t1 = exp1_clock.getTime()
+            
+            key_out = event.waitKeys(maxWait=max_wait)
+            
+            t2 = exp1_clock.getTime(key_out)
             
             if not key_out:
                 pass
-            elif key_out[0] == key_q:
+            elif key_out == key_r:
+                f.write('\nTrial ' + str(i) + ': ' + str(key_out)+ ', ' + str(t2-t1) + rand_img)
+            elif key_out == key_q:
                 f.close()
                 win.close()
                 core.quit()
-            else:
-                f.write('\n Key Pressed:' + str(key_out[0]) + ', ' + str(t2-t1))
-      
-                circ_stim = visual.Circle(win, radius=7.5,
-                        units='pix',
-                        fillColor=('red'),
-                        pos=(0,0))
-                circ_stim.draw()
-                win.flip
-                core.wait(2)
-                
-            imgs_cycled_through.append(img)
             
-            core.wait(.5)
-
+            #core.wait(.5)
             core.wait(0.1)     
             
-            img_t2 = core.getTime() 
+            img_t2 = exp1_clock.getTime() 
+            f_img_time = open("./Data_Collected/stimuli_timing.txt", "a")
+            f_img_time.write(str(img_t2-t1)+"\n")
+
+        
     except:
         win.close()
         # Raise last error
         raise
-
-# three second pause between blocks :)
-def block_pause(win):
-    fixation_point(win,'yellow')
-    win.flip()
-    core.wait(.5)
-
-
+    f.write('\nImages in Block ' + str(block_num) + ':')
+    for img_stim in imgs_in_trial:
+        f.write('\n' + img_stim)
 
 
