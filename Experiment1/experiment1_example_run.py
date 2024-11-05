@@ -1,5 +1,5 @@
 # Run experiment
-#%%
+
 from psychopy import visual, core, event
 import matplotlib.pyplot as plt
 import numpy as np
@@ -67,27 +67,6 @@ fullscreen_size = [600,600] # [1440, 900] # For mac retina 12" laptop,  may need
 # Parameters
 screenFps = 60
 ifi = 1 / screenFps
-<<<<<<< HEAD
-deadlinePct = 0.1 # percent of a screen refresh interval by which 
-whileLoopDelta = 0.001 # 1 ms
-# to return control in while loops
-
-imageFolder = pathlib.Path('C:/Users/gis_r/Documents/Python/Assignment 1/fLoc_stimuli').expanduser()
-subjectNumber = 1
-fullScreen = False # false for debugging, True to run
-screenSize = [500,500] #[1440, 900] # For mac laptop, may need to change for you! 
-imageSize = [500,500]
-textColor = [255, 255, 255]
-fixationColor = [255, 235, 0] # a nice yellow
-fixationSize = 12 # pixels
-screenColor = [128,128,128]
-
-
-# File to save
-date = datetime.datetime.now()
-datestr = date.strftime('%Y_%m_%d_%H_%M')
-sfile = f'subject{subjectNumber:02d}_{datestr}.npz'
-=======
 deadline_pct = 0.1 # percent of a screen refresh interval by which 
 while_loop_delta = 0.001 # 1 ms, time ahead of flip deadline by which to return control in response collection
 image_size = [500,500]
@@ -99,7 +78,6 @@ if fullscreen:
     screen_size = []
 else:
     screen_size = fullscreen_size
->>>>>>> 2da022e0d746b90e428d74552eae35c76a14b267
 # Instructions
 instructions_choice = 'Please press the button you want to use to respond'
 quit_keys = ['escape', 'q']
