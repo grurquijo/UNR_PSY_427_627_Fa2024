@@ -8,10 +8,11 @@ from psychopy.hardware import keyboard
 
 # Function
 
-def find_files(path, opt1, opt2, empty_list):
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            if file.startswith(opt1) or file.startswith(opt2):
+def find_files(path, empty_list, opt1, opt2='None'):
+    if opt2 is not 'None':
+        for root, dirs, files in os.walk(path):
+            for file in files:
+                if file.startswith(opt1) or file.startswith(opt2):
                 empty_list.append(os.path.join(path, file))
   
 def check_keypress(key_r, key_q,f,win):
