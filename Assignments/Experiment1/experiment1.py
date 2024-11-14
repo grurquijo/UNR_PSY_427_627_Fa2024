@@ -56,21 +56,32 @@ while keys_equal:
 
 # grab stimuli
 faces = []
-find_files(floc_dir, 'adult', 'child', faces)
+find_files(floc_dir, faces, 'child') # gotta change this function
 
 faces_trial = [i for i in np.random.choice(faces, size=40)]
 
 places = []
-find_files(floc_dir, 'house', 'corridor', places)
+find_files(floc_dir, places, 'corridor')
 
 places_trial = [i for i in np.random.choice(places, size=40)]
 
 objects = []
-find_files(floc_dir, 'instrument', 'car', objects)
+find_files(floc_dir, objects, 'car')
 
 objects_trial = [i for i in np.random.choice(objects, size=40)]
 
-shuffle = np.hstack((faces_trial, places_trial, objects_trial))
+bodies = []
+find_files(floc_dir, bodies, 'body')
+
+bodies_trial = [i for i in np.random.choice(bodies, size=40)]
+
+#character = []
+#find_files(floc_dir, character, 'number')
+
+#character_trial = [i for i in np.random.choice(character, size=40)]
+
+
+shuffle = np.hstack((faces_trial, places_trial, objects_trial, bodies_trial))
 
 shuffle_trial = [i for i in np.random.choice(shuffle, size=40)]
 
@@ -104,6 +115,9 @@ for i,idx in enumerate (trial_order):
     
     win.flip()
     core.wait(2)
+
+# histograms!
+
 
 fid.close()
 win.close()

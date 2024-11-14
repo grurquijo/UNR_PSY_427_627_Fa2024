@@ -6,7 +6,7 @@ import numpy as np
 import pathlib
 import datetime
 
-def plot_timing(timing, hist_bounds=.1, mean_image_time=0.5, hist_bins=31):
+def plot_timing(timing, hist_bounds=.2, mean_image_time=0.5, hist_bins=31):
     image_time = np.array([x['image_shown'] for x in timing])
     print("Mean and std of image time:")
     print(f'{np.mean(image_time):0.5f}, {np.std(image_time):0.5f}')

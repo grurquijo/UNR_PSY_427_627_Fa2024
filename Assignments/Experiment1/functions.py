@@ -13,7 +13,13 @@ def find_files(path, empty_list, opt1, opt2='None'):
         for root, dirs, files in os.walk(path):
             for file in files:
                 if file.startswith(opt1) or file.startswith(opt2):
-                empty_list.append(os.path.join(path, file))
+                    empty_list.append(os.path.join(path, file))
+    
+    else:
+        for root, dirs, files in os.walk(path):
+            for file in files:
+                if file.startswith(opt1):
+                    empty_list.append(os.path.join(path, file))
   
 def check_keypress(key_r, key_q,f,win):
     key_out = event.getKeys()
@@ -31,6 +37,7 @@ def trial(win, block_num, tnum, array, key_r, key_q, f, max_wait):
         f.write('\n Block ' + str(block_num) + ':' )
         exp1_clock = core.Clock()
         imgs_in_trial = []
+        img_timing = []
         for i in range(tnum):
             
             circ_stim = visual.Circle(win, radius=7.5,
@@ -68,12 +75,14 @@ def trial(win, block_num, tnum, array, key_r, key_q, f, max_wait):
                 win.close()
                 core.quit()
             
-            #core.wait(.5)
-            core.wait(0.1)     
-            
             img_t2 = exp1_clock.getTime() 
+            #core.wait(.5)
+            core.wait(0.2)     
+            
             f_img_time = open("./Data_Collected/stimuli_timing.txt", "a")
             f_img_time.write(str(img_t2-t1)+"\n")
+
+            img_timing.append(img_t2 - t1)
 
         
     except:

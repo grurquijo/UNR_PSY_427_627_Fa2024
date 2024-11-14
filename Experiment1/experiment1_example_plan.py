@@ -13,11 +13,11 @@ imageISI = 0.1 # inter-stimulus interval, seconds
 blockISI = 3 # gap between blocks, seconds
 # Block types & sub-categories (categories in alphabetical order)
 block_categories = {
-    'bodies':['limb','body'],
-    'characters':['word','number'],
-    'faces':['adult','child'],
-    'objects':['car','instrument'],
-    'places':['house','corridor'],
+    'bodies':['body'],
+    'characters':['number'],
+    'faces':['child'],
+    'objects':['instrument'],
+    #'places':['corridor'],
     'scrambled':['scrambled']}
 block_category_names = sorted(list(block_categories.keys()))
 # Image file location (assumes all images are in same folder, as they 
