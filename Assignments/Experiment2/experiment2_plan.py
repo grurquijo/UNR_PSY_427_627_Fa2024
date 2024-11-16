@@ -37,4 +37,22 @@ while keys_equal:
         pass
     else:
         win.flip()
-        keys_equal = False
+        keys_equal = 
+        
+# you can get dialogue from dict and responses save to a list
+# json writer and parser DO IT BITCH THIS IS THE PLACE TO DO IT
+# save plan to json bc it can be opened with other languages and pickle can be big
+
+# use dialogue box to get information about:
+#       - use default trial, edit existing, or create new
+#           > unique name or generated name
+#       - name of folder where stimuli exist 
+#           > warn that stimuli should all be in the same folder and uniquely named 
+#           > will search for directory location
+#       -f for new trial (define what a trial consists of):
+#           > screen size and screen color
+#           > number of trials
+#           > because this is a two alternative forced comparison experiment 
+#               >> what two categories are we comparing/are we comparing just from the same category
+#           > duration of stimulus and max_wait time
+#           
