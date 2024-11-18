@@ -1,3 +1,6 @@
+# Name: Giselle Urquijo
+# Date modified: 11/16/2024
+
 import os
 import sys
 import psychopy
@@ -8,8 +11,8 @@ from psychopy.hardware import keyboard
 
 # (1) Get all images that match a certain pattern (i.e. contain some sub-string) from a directory. The directory and sub-string should be the inputs, and a list or cell array of file names should be the output
 
-def find_files(path:str, empty_list:list, key_words:list):
-    for x in key_words:
+def find_files(path:str, empty_list:list, file_name:list):
+    for x in file_name:
         for root, dirs, files in os.walk(path):
             for file in files:
                 if file.startswith(x):
@@ -18,14 +21,15 @@ def find_files(path:str, empty_list:list, key_words:list):
 # (2) Collect responses
 
 def check_keypress(key_list:list, key_in):
-    if key_in == key_list[0]:
-        key_out, key_time = event.waitKeys()
-    elif key_in == key_list[1]:
+    if key_in[0] == key_list[0]:
+        key_out, key_time = key_in
+        print(key_out)
+    elif key_in[0] == key_list[1]:
         raise Exception ('Quit Experiment')
     return key_out, key_time
 
 # (3) Set up the screen.
-def screen_setup(screen_size:list, fullscreen:False, screen_color:list|'gray'):
+def screen_setup(screen_size:list, fullscreen:False, screen_color):
     if fullscreen is True:
         win = visual.Window(color=screen_color,
                             fullscr=True,
@@ -62,7 +66,7 @@ def screen_setup(screen_size:list, fullscreen:False, screen_color:list|'gray'):
 def trial(trial_num:int, stim_list:list, stim_duration:float, win=win):
     while trial_num >= 0:
         img1 = visual.ImageStim(win, random.choice(stim_list), pos=(-200,0), size=(300,300), units="pix")
-        img2 = visual.ImageStim(win, random.choice(array), pos=(200,0), size=(300,300), units="pix")
+        img2 = visual.ImageStim(win, random.choice(stim_list), pos=(200,0), size=(300,300), units="pix")
         img1.draw()
         img2.draw()
         win.flip()
