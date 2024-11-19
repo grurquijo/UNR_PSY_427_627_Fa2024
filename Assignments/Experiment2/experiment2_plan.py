@@ -17,7 +17,8 @@ from experiment2_functions import *
 # use dialogue box to get information about:
 #       - use default trial, edit existing, or create new
 #           > unique name or generated name
-choose_experiment = {'Choose one of the following': ('default experiment', 
+choose_experiment = {'Choose one of the following': ('',
+                                                     'default experiment', 
                                                      'choose existing experiment', 
                                                      'create new experiment', 
                                                      'edit existing experiment')}
@@ -29,32 +30,60 @@ tst = dlg_win_one.dictionary['Choose one of the following']
 # im so sad i cant use match case here since its only available in python 3.10 :(
 if tst == 'default experiment':
     print('1')
+    load_experiment = open_file(filename='./load_experiment.json')
+    load_experiment.update({'Experiment to load': './Experiments/default_experiment.json'})
+    write_json(data=load_experiment, filename='./load_experiment.json')
+    
     stimuli_loc = {'Pathname of stimuli folder':'C:/Users/Giselle/Documents/python/UNR/fLoc_stimuli'}
     dlg_default_experiment = gui.DlgFromDict(dictionary=stimuli_loc, title='Experiment 2', copyDict=True)
 
-    fname = dlg_default_experiment.dictionary
+    fname = dlg_default_experiment.dictionary['Pathname of stimuli folder']
+    
     temp = open_file(filename='./Experiments/default_experiment.json')
-    temp["Stimuli location"].append(fname['Pathname of stmuli folder'])
+    temp.update({'Stimuli location': fname})
+    
     write_json(data=temp, filename='./Experiments/default_experiment.json')
     
 elif tst == 'choose existing experiment':
     print('2')
+    
     saved_trials = {'choose one': []}
     f = list_files(path='./Experiments')
     for i,idx in enumerate(f):
         saved_trials['choose one'].append(f[i])
     
     dlg_choose_existing_experiment = gui.DlgFromDict(dictionary=saved_trials, title='Experiment2', sortKeys=False, copyDict=True)
+    
+    stimuli_loc = {'Pathname of stimuli folder':''}
+    dlg_stim_loc = gui.DlgFromDict(dictionary=stimuli_loc, title='Experiment 2', copyDict=True)
+
+    fname = dlg_stim_loc.dictionary['Pathname of stimuli folder']
+    
+    temp = open_file(filename='./Experiments/'+dlg_choose_existing_experiment.dictionary['choose one'])
+    temp.update({'Stimuli location': fname})
+    
+    write_json(data=temp, filename='./Experiments/'+dlg_choose_existing_experiment.dictionary['choose one'])
+    
+    
+    load_experiment = open_file(filename='./load_experiment.json')
+    load_experiment.update({'Experiment to load': './Experiments/'+dlg_choose_existing_experiment.dictionary['choose one']})
+    
+    write_json(data=load_experiment, filename='./load_experiment.json')
+    
 
 elif tst == 'create new experiment':
     print('3')
     fname = gen_new_filename()
+    
+    load_experiment = open_file(filename='./load_experiment.json')
+    load_experiment.update({'Experiment to load': './Experiments/'+fname})
+    write_json(data=load_experiment, filename='./load_experiment.json')
     #       - name of folder where stimuli exist 
     #           > warn that stimuli should all be in the same folder and uniquely named 
     #           > will search for directory location
     stimuli_loc = {'Pathname of stimuli folder':'C:/Users/Giselle/Documents/python/UNR/fLoc_stimuli'}
 
-    dlg_win_two = gui.DlgFromDict(dictionary=stimuli_loc, title='Experiment 2',sortKeys=False, copyDict=True)
+    dlg_stim_loc = gui.DlgFromDict(dictionary=stimuli_loc, title='Experiment 2',sortKeys=False, copyDict=True)
     #       - for new trial (define what a trial consists of):
     #           > screen size and screen color
     #           > number of trials
@@ -62,16 +91,22 @@ elif tst == 'create new experiment':
     #               >> what two categories are we comparing/are we comparing just from the same category
     #           > duration of stimulus and max_wait time
     #           
-    create_new_trial = {'Screen size (pixels)':'True, False, or [height,width]',
-                        'Screen color':'(0.5,0.5,0.5)', 
+    create_new_trial = {'Full screen': ['True', 'False'],
+                        'Screen size (pixels)':'height,width',
+                        'Screen color':'0.5,0.5,0.5', 
                         'Number of trials':0, 
-                        'Category names':'faces', 
+                        'Category names':'option 1, option 2', 
                         'Stimulus duration (s)':0, 
                         'Max wait time (s)':0}
+    
+    template = {'Stimuli location': dlg_stim_loc.dictionary['Pathname of stimuli folder'], 'Experiment set-up': {}}
+    write_json(data=template, filename='./Experiments/'+fname)
+    
+    dlg_create_new_experiment = gui.DlgFromDict(dictionary=create_new_trial, title='Experiment 2',sortKeys=False, copyDict=True)
+    
+    template["Experiment set-up"].update(dlg_create_new_experiment.dictionary)
 
-    dlg_win_three = gui.DlgFromDict(dictionary=create_new_trial, title='Experiment 2',sortKeys=False, copyDict=True)
-
-    write_json(data=dlg_win_three.dictionary, filename='./Experiments/'+fname)
+    write_json(data=template, filename='./Experiments/'+fname)
 
 elif tst == 'edit existing experiment':
     print('4')
@@ -79,10 +114,18 @@ elif tst == 'edit existing experiment':
     f = list_files(path='./Experiments')
     for i,idx in enumerate(f):
         saved_trials['choose one'].append(f[i])
-    dlg_edit_existing_experiment = gui.DlgFromDict(dictionary=saved_trials, title='Experiment2', sortKeys=False, copyDict=True)
+    dlg_choose_existing_experiment = gui.DlgFromDict(dictionary=saved_trials, title='Experiment2', sortKeys=False, copyDict=True)
+    
+    stimuli_loc = {'Pathname of stimuli folder':''}
+    dlg_stim_loc = gui.DlgFromDict(dictionary=stimuli_loc, title='Experiment 2', copyDict=True)
+    
+    chosen_experiment = dlg_choose_existing_experiment.dictionary['choose one']
+    edit_experiment = open_file(filename='./Experiments/' + chosen_experiment)
 
-    chosen_experiment = dlg_edit_existing_experiment.dictionary
-
-    edit_experiment = open_file(filename='./Experiments/' + chosen_experiment['choose one'])
-
-    dlg_edit_existing_experiment = gui.DlgFromDict(dictionary=edit_experiment)
+    dlg_edit_existing_experiment = gui.DlgFromDict(dictionary=edit_experiment['Experiment set-up'], title='Experiment 2',sortKeys=False, copyDict=True)
+    
+    temp = open_file(filename='./Experiments/'+dlg_choose_existing_experiment.dictionary['choose one'])
+    temp.update({'Stimuli location': dlg_stim_loc.dictionary['Pathname of stimuli folder'], 'Experiment set-up': edit_experiment['Experiment set-up']})
+    
+    write_json(data=temp, filename='./Experiments/'+dlg_edit_existing_experiment.dictionary['choose one'])
+    

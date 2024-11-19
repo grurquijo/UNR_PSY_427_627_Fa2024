@@ -1,0 +1,14 @@
+{
+  "Stimuli location": "C:/Users/Giselle/Documents/python/UNR/fLoc_stimuli",
+  "Experiment set-up": {
+    "Screen size (pixels)": "True, False, or [height,width]",
+    "Screen color": "(0.5,0.5,0.5)",
+    "Number of trials": 0,
+    "Category names": [
+      "car",
+      "corridor"
+    ],
+    "Stimulus duration (s)": 0,
+    "Max wait time (s)": 0
+  }
+}

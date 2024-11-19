@@ -84,15 +84,16 @@ def check_keypress(key_list:list, key_in):
     return key_out, key_time
 
 # (3) Set up the screen.
-def screen_setup(screen_size:list, fullscreen:False, screen_color:tuple = (0.5,0.5,0.5)):
+def screen_setup(screen_size:list, screen_color:any=(0.5,0.5,0.5), fullscreen:bool=False):
     if fullscreen is True:
         win = visual.Window(color=screen_color,
                             fullscr=True,
                             units='pix',)
     else:
-        win = visual.Window(color=screen_color,
-                    fullscr=screen_size,
-                    units='pix',) 
+        win = visual.Window(size=screen_size,
+                            color=screen_color,
+                            fullscr=fullscreen,
+                            units='pix',) 
     return win
     
  
@@ -118,7 +119,7 @@ def screen_setup(screen_size:list, fullscreen:False, screen_color:tuple = (0.5,0
 
 # The experiment should contain 30 trials.
 # what exactly is in a trial? is one trial just one judgement or are we doing categories as trials??
-def trial(trial_num:int, stim_list:list, stim_duration:float, win):
+def trial(trial_num:int, stim_list:list, stim_duration: float, win):
     while trial_num >= 0:
         img1 = visual.ImageStim(win, stim_list, pos=(-200,0), size=(300,300), units="pix")
         img2 = visual.ImageStim(win, stim_list, pos=(200,0), size=(300,300), units="pix")
