@@ -1,11 +1,13 @@
 {
-  "Stimuli location": "testing",
+  "Stimuli location": "C:/Users/Giselle/Documents/python/UNR/fLoc_stimuli",
   "Experiment set-up": {
-    "Screen size (pixels)": "True, False, or [height,width]",
-    "Screen color": "(0.5,0.5,0.5)",
-    "Number of trials": 0,
-    "Category names": "faces",
-    "Stimulus duration (s)": 0,
-    "Max wait time (s)": 0
+    "Full screen": "True",
+    "Screen size (pixels)": "800,800",
+    "Screen color": "0.5,0.5,0.5",
+    "Number of trials": 30,
+    "Number of matches": 5,
+    "Category names": "car,body",
+    "Stimulus duration (s)": ".1",
+    "Max wait time (s)": 15
   }
 }

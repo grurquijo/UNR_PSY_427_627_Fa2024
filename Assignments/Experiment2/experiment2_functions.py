@@ -5,11 +5,12 @@ import os
 import sys
 import json
 import psychopy
+import numpy as np
 import matplotlib.pyplot as plt
 
 from psychopy import visual, core, event
 from psychopy.hardware import keyboard
-
+from psychopy.visual.shape import ShapeStim
 
 # Json file management
 def write_json(data, filename:str):
@@ -74,14 +75,17 @@ def find_files(path:str, empty_list:list, file_name:list) -> list:
 
 # (2) Collect responses
 
-def check_keypress(key_list:list, key_in):
-    if key_in[0] == key_list[0]:
-        key_out, key_time = key_in
-        print(key_out)
-    elif key_in[0] == key_list[1]:
-        raise Exception ('Quit Experiment')
+def check_keypress(quit_list:list, key_in, win):#key_response:list, 
+    if key_in == 'none':
+        print('timed out')
+    elif key_in in quit_list:
+        print('\033[92m Exiting experiment \033[0m')
+        win.close()
+        raise
+    else: 
+        pass
     
-    return key_out, key_time
+    #return key_out, key_time
 
 # (3) Set up the screen.
 def screen_setup(screen_size:list, screen_color:any=(0.5,0.5,0.5), fullscreen:bool=False):
@@ -96,8 +100,22 @@ def screen_setup(screen_size:list, screen_color:any=(0.5,0.5,0.5), fullscreen:bo
                             units='pix',) 
     return win
     
-def cross():
-    fix_point = visual.cross()
+def fixation_point(win, fix_color='white'):
+    fixation = visual.ShapeStim(win, 
+                                vertices=((0, -5), (0, 5), (0,0), (-5,0), (5, 0)),
+                                lineWidth=.75,
+                                closeShape=False,
+                                lineColor=fix_color)
+    return fixation
+
+def randomize_matches(size, percent_match):
+    '''
+    given number of trials(size) assigns a given percentage of True for matching
+    size: number of trials
+    percent_match: percentage of trials you want to match as a decimal >> 0.25 for 25%
+    '''
+    match_array = np.random.choice([True,False], size=size, p=[percent_match, 1-percent_match])
+    return match_array
 # Inputs should be:
 
 # screen size
@@ -120,11 +138,24 @@ def cross():
 
 # The experiment should contain 30 trials.
 # what exactly is in a trial? is one trial just one judgement or are we doing categories as trials??
-def trial(stim, stim_duration: float, win):
-    img1 = visual.ImageStim(win, stim, pos=(-200,0), size=(300,300), units="pix")
-    img2 = visual.ImageStim(win, stim, pos=(200,0), size=(300,300), units="pix")
+def trial(repeat:bool, stim:list, stim_duration: float, win, fixation):
+    if not repeat:
+        img1 = visual.ImageStim(win, stim[0], pos=(-200,0), size=(300,300), units="pix")
+        img2 = visual.ImageStim(win, stim[1], pos=(200,0), size=(300,300), units="pix")
+    else:
+        img1 = visual.ImageStim(win, stim[0], pos=(-200,0), size=(300,300), units="pix")
+        img2 = visual.ImageStim(win, stim[0], pos=(200,0), size=(300,300), units="pix")
+    
     img1.draw()
     img2.draw()
+    
     win.flip()
+    fixation.draw()
     core.wait(stim_duration)
+    win.flip()
+    # response = event.waitKeys(maxWait=max_wait,
+    #                                       timeStamped=True, 
+    #                                       clearEvents=True,), max_wait
+    
+    # return response
 # You should write your code to be flexible enough to quickly implement a change in image directory (to show other same/different images). That will be your next assignment!

@@ -93,10 +93,11 @@ elif opt == 'create new experiment':
     create_new_trial = {'Full screen': ['True', 'False'],
                         'Screen size (pixels)':'height,width',
                         'Screen color':'0.5,0.5,0.5', 
-                        'Number of trials':0, 
+                        'Number of trials':0,
+                        'Number of matches': 3,
                         'Category names':'option 1, option 2', 
-                        'Stimulus duration (s)':0, 
-                        'Max wait time (s)':0}
+                        'Stimulus duration (s)':'0', 
+                        'Max wait time (s)':'0'}
     
     template = {'Stimuli location': dlg_stim_loc.dictionary['Pathname of stimuli folder'], 'Experiment set-up': {}}
     write_json(data=template, filename='./Experiments/'+fname)
