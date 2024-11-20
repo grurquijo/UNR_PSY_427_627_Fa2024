@@ -96,7 +96,8 @@ def screen_setup(screen_size:list, screen_color:any=(0.5,0.5,0.5), fullscreen:bo
                             units='pix',) 
     return win
     
- 
+def cross():
+    fix_point = visual.cross()
 # Inputs should be:
 
 # screen size
@@ -119,13 +120,11 @@ def screen_setup(screen_size:list, screen_color:any=(0.5,0.5,0.5), fullscreen:bo
 
 # The experiment should contain 30 trials.
 # what exactly is in a trial? is one trial just one judgement or are we doing categories as trials??
-def trial(trial_num:int, stim_list:list, stim_duration: float, win):
-    while trial_num >= 0:
-        img1 = visual.ImageStim(win, stim_list, pos=(-200,0), size=(300,300), units="pix")
-        img2 = visual.ImageStim(win, stim_list, pos=(200,0), size=(300,300), units="pix")
-        img1.draw()
-        img2.draw()
-        win.flip()
-        core.wait(stim_duration)
-        trial_num -=1
+def trial(stim, stim_duration: float, win):
+    img1 = visual.ImageStim(win, stim, pos=(-200,0), size=(300,300), units="pix")
+    img2 = visual.ImageStim(win, stim, pos=(200,0), size=(300,300), units="pix")
+    img1.draw()
+    img2.draw()
+    win.flip()
+    core.wait(stim_duration)
 # You should write your code to be flexible enough to quickly implement a change in image directory (to show other same/different images). That will be your next assignment!

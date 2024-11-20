@@ -10,8 +10,7 @@ from experiment2_functions import *
 
 # use dialogue box to create experiments
     
-# you can get dialogue from dict and responses save to a list >>saves as a dict and can be passed into json 
-# we're using json just DO IT BITCH
+# you can get dialogue from dict and responses save to a list >>saves as a dict and can be passed into json
 # save plan to json bc it can be opened with other languages and pickle can be big
 
 # use dialogue box to get information about:
@@ -25,10 +24,10 @@ choose_experiment = {'Choose one of the following': ('',
 
 dlg_win_one = gui.DlgFromDict(dictionary=choose_experiment, title='Experiment 2', sortKeys=False, copyDict=True, )
 
-tst = dlg_win_one.dictionary['Choose one of the following']
+opt = dlg_win_one.dictionary['Choose one of the following']
 
 # im so sad i cant use match case here since its only available in python 3.10 :(
-if tst == 'default experiment':
+if opt == 'default experiment':
     print('1')
     load_experiment = open_file(filename='./load_experiment.json')
     load_experiment.update({'Experiment to load': './Experiments/default_experiment.json'})
@@ -44,7 +43,7 @@ if tst == 'default experiment':
     
     write_json(data=temp, filename='./Experiments/default_experiment.json')
     
-elif tst == 'choose existing experiment':
+elif opt == 'choose existing experiment':
     print('2')
     
     saved_trials = {'choose one': []}
@@ -71,7 +70,7 @@ elif tst == 'choose existing experiment':
     write_json(data=load_experiment, filename='./load_experiment.json')
     
 
-elif tst == 'create new experiment':
+elif opt == 'create new experiment':
     print('3')
     fname = gen_new_filename()
     
@@ -108,7 +107,7 @@ elif tst == 'create new experiment':
 
     write_json(data=template, filename='./Experiments/'+fname)
 
-elif tst == 'edit existing experiment':
+elif opt == 'edit existing experiment':
     print('4')
     saved_trials = {'choose one': []}
     f = list_files(path='./Experiments')
