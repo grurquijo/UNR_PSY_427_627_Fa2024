@@ -7,6 +7,8 @@ import datetime
 import psychopy
 import numpy as np
 
+from moviepy.editor import *
+
 from psychopy import visual, core, event
 from experiment2_functions import *
 
@@ -63,14 +65,14 @@ exp2_message = visual.TextStim(win, text='In this experiment, you will be compar
                 '\n\nPress any key to continue.')
 exp2_message.draw()
 win.flip()
-testone = win.getMovieFrame()
+win.getMovieFrame()
 key_pressed= event.waitKeys(clearEvents=True, timeStamped=True)
 check_keypress(quit_list=key_quit, key_in=key_pressed, win=win)
-_, key_time = key_pressed[0]
-num_rpt = (1/30) * key_time
-num_rpt_rnd = np.round(num_rpt)
-for i in range(int(num_rpt_rnd)):
-    win.getMovieFrame()
+# _, key_time = key_pressed[0]
+# num_rpt = (1/30) * key_time
+# num_rpt_rnd = np.round(num_rpt)
+# for i in range(int(num_rpt_rnd)):
+#     win.getMovieFrame()
 
 #y_me = fix_saved_video_frame_rate(key_pressed=key_pressed, win=win)
 
@@ -91,14 +93,14 @@ while keys_equal:
     message.setAutoDraw(False)
     message.draw()
     win.flip()
-    win.getMovie_frame()
+    win.getMovieFrame()
     key_pressed = event.waitKeys(clearEvents=True)
     check_keypress(quit_list=key_quit, key_in=key_pressed[0], win=win)
     
     message.setText('Choose a response key for "same".')
     message.draw()
     win.flip()
-    win.getMovie_frame()
+    win.getMovieFrame()
     key_same = event.waitKeys(clearEvents=True)
     participant_keys.append(key_same[0])
     check_keypress(quit_list=key_quit, key_in=key_same[0], win=win)#key_response=[],
@@ -150,8 +152,8 @@ for i in range(trial_num):
     img_repeat = match_array[i]
     next_stim = [i for i in np.random.choice(exp_stim, size=2, replace=False)]
     
-    t0 = clock_init.getTime()
     tmp = trial(repeat=img_repeat,stim=next_stim, stim_duration=stim_duration, win=win, fixation=fixation_neutral)#, max_wait=max_wait
+    t0 = clock_init.getTime()
     response = event.waitKeys(maxWait=max_wait,
                                           timeStamped=clock_init, 
                                           clearEvents=True,)
@@ -176,6 +178,11 @@ for i in range(trial_num):
                   '\nCorrect: Yes \n')
         fixation_correct.draw()
         win.flip()
+        key_pressed = event.getKeys()
+        if key_pressed is not None:
+            check_keypress(win=win,
+                        quit_list=key_quit,
+                        key_in=key_pressed)
         win.getMovieFrame()
         core.wait(1)
     elif (key == participant_keys[1]) and (img_repeat == False):
@@ -184,6 +191,11 @@ for i in range(trial_num):
                   '\nCorrect: Yes\n')
         fixation_correct.draw()
         win.flip()
+        key_pressed = event.getKeys()
+        if key_pressed is not None:
+            check_keypress(win=win,
+                        quit_list=key_quit,
+                        key_in=key_pressed)
         win.getMovieFrame()
         core.wait(1)
     else:
@@ -192,10 +204,32 @@ for i in range(trial_num):
                   '\nCorrect: No\n')
         fixation_incorrect.draw()
         win.flip()
+        key_pressed = event.getKeys()
+        if key_pressed is not None:
+            check_keypress(win=win,
+                        quit_list=key_quit,
+                        key_in=key_pressed)
         win.getMovieFrame()
         core.wait(1)
-print(win.monitorFramePeriod)
-win.saveFrameIntervals()
+win.flip()
+frame_times = [i for i in win.frameIntervals]
+frame_images = [np.array(i) for i in win.movieFrames]
+images_array = []
+for i,idx in enumerate(frame_images):
+    print(i, idx)
+    
+    images_array.append(np.array(idx))
+frame_tuples = list(zip(images_array, frame_times))
+# test = VideoClip(make_frame, duration=)
+# final_clip = concatenate_videoclips(exp_clips)
+# final_clip.write_videofile('./testing.mp4', fps=30)
+#exp_clips = np.array(exp_clips)
+clip = ImageSequenceClip(np.array(frame_tuples), fps=30)
+clip.write_videofile('./anothertest.mp4')
+print(str(len(win.movieFrames)))
+print(str(len(win.frameIntervals)))
+#look at ImageClip.setduration
+win.saveFrameIntervals(fileName='./experimentframetest.json')
 win.saveMovieFrames(fileName='./ExperimentMovie.mp4')
 fid.close()    
 win.close()

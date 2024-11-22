@@ -714,3 +714,420 @@ Correct: Yes
 Key: p
 Response Time: 1.03601560000061
 Correct: Yes
+
+
+11/21/2024
+Data for ./Experiments/Experiment1.json:
+ Key: o
+Response Time: 0.9585856000012427
+Correct: No
+
+Key: p
+Response Time: 1.1061109000002034
+Correct: Yes
+
+ Key: o
+Response Time: 1.154678300001251
+Correct: No
+
+Key: p
+Response Time: 0.6789167999995698
+Correct: Yes
+
+ Key: p
+Response Time: 0.7467763000022387
+Correct: No
+
+
+11/21/2024
+Data for ./Experiments/Experiment1.json:
+Key: p
+Response Time: 1.0983921000006376
+Correct: Yes
+
+Key: p
+Response Time: 0.8760532000014791
+Correct: Yes
+
+Key: o
+Response Time: 0.9310403000017686
+Correct: Yes 
+
+Key: o
+Response Time: 0.9537936999986414
+Correct: Yes 
+
+Key: o
+Response Time: 0.9683990000012273
+Correct: Yes 
+
+
+11/21/2024
+Data for ./Experiments/Experiment1.json:
+ Key: p
+Response Time: 1.011869800000568
+Correct: No
+
+Key: o
+Response Time: 1.2753991999998107
+Correct: Yes 
+
+Key: p
+Response Time: 0.9874296999987564
+Correct: Yes
+
+Key: p
+Response Time: 1.0399571000016294
+Correct: Yes
+
+Key: o
+Response Time: 1.0203934999990452
+Correct: Yes 
+
+
+11/21/2024
+Data for ./Experiments/Experiment1.json:
+Key: p
+Response Time: 1.0288288999981887
+Correct: Yes
+
+Key: o
+Response Time: 0.9089915000004112
+Correct: Yes 
+
+Key: p
+Response Time: 0.8401558000005025
+Correct: Yes
+
+Key: p
+Response Time: 1.1011877000019012
+Correct: Yes
+
+Key: o
+Response Time: 0.9704682000010507
+Correct: Yes 
+
+
+11/21/2024
+Data for ./Experiments/Experiment1.json:
+Key: p
+Response Time: 0.9627312999982678
+Correct: Yes
+
+Key: p
+Response Time: 0.7909809000011592
+Correct: Yes
+
+Key: o
+Response Time: 1.0500632000002952
+Correct: Yes 
+
+Key: o
+Response Time: 0.9334866000026523
+Correct: Yes 
+
+Key: o
+Response Time: 0.7182084000014584
+Correct: Yes 
+
+
+11/21/2024
+Data for ./Experiments/Experiment1.json:
+ Key: o
+Response Time: 0.8073666999989655
+Correct: No
+
+Key: o
+Response Time: 0.9526397000008728
+Correct: Yes 
+
+Key: p
+Response Time: 0.8404016999993473
+Correct: Yes
+
+Key: p
+Response Time: 1.0460405000012543
+Correct: Yes
+
+ Key: p
+Response Time: 1.0053857999992033
+Correct: No
+
+
+11/21/2024
+Data for ./Experiments/Experiment1.json:
+ Key: o
+Response Time: 0.9604435000001104
+Correct: No
+
+
+11/21/2024
+Data for ./Experiments/Experiment1.json:
+Key: p
+Response Time: 0.8913852000005136
+Correct: Yes
+
+ Key: o
+Response Time: 0.9965191000010236
+Correct: No
+
+Key: p
+Response Time: 0.9290858999993361
+Correct: Yes
+
+Key: p
+Response Time: 0.8556561000004876
+Correct: Yes
+
+
+11/21/2024
+Data for ./Experiments/Experiment1.json:
+Key: p
+Response Time: 0.8613011999987066
+Correct: Yes
+
+Key: p
+Response Time: 0.8908254000016314
+Correct: Yes
+
+Key: o
+Response Time: 0.8033513000009407
+Correct: Yes 
+
+Key: p
+Response Time: 0.9218233999999939
+Correct: Yes
+
+Key: p
+Response Time: 0.8895747999995365
+Correct: Yes
+
+
+11/21/2024
+Data for ./Experiments/Experiment1.json:
+Key: p
+Response Time: 0.914112299997214
+Correct: Yes
+
+Key: o
+Response Time: 0.877850099997886
+Correct: Yes 
+
+ Key: o
+Response Time: 1.2731518000000506
+Correct: No
+
+Key: p
+Response Time: 0.8354574000004504
+Correct: Yes
+
+Key: o
+Response Time: 0.9257847000008042
+Correct: Yes 
+
+
+11/21/2024
+Data for ./Experiments/Experiment1.json:
+Key: p
+Response Time: 0.8943696999995154
+Correct: Yes
+
+Key: p
+Response Time: 0.9135501999990083
+Correct: Yes
+
+Key: p
+Response Time: 0.8613481000029424
+Correct: Yes
+
+Key: o
+Response Time: 0.8726253999993787
+Correct: Yes 
+
+Key: p
+Response Time: 1.032165000000532
+Correct: Yes
+
+
+11/21/2024
+Data for ./Experiments/Experiment1.json:
+Key: p
+Response Time: 0.8745314000007056
+Correct: Yes
+
+Key: p
+Response Time: 0.7106506999989506
+Correct: Yes
+
+Key: p
+Response Time: 0.6741068999981508
+Correct: Yes
+
+Key: p
+Response Time: 0.7319237000010617
+Correct: Yes
+
+ Key: p
+Response Time: 0.7050613999999769
+Correct: No
+
+
+11/22/2024
+Data for ./Experiments/Experiment1.json:
+Key: o
+Response Time: 0.8933628999984649
+Correct: Yes 
+
+Key: o
+Response Time: 0.7210152999978163
+Correct: Yes 
+
+Key: o
+Response Time: 0.951865999999427
+Correct: Yes 
+
+ Key: p
+Response Time: 1.037231199999951
+Correct: No
+
+Key: o
+Response Time: 0.9989502000025823
+Correct: Yes 
+
+
+11/22/2024
+Data for ./Experiments/Experiment1.json:
+ Key: o
+Response Time: 0.858217600001808
+Correct: No
+
+Key: p
+Response Time: 0.8210808000003453
+Correct: Yes
+
+Key: p
+Response Time: 0.8410678999971424
+Correct: Yes
+
+Key: o
+Response Time: 0.7598766000010073
+Correct: Yes 
+
+Key: p
+Response Time: 0.8955211000029522
+Correct: Yes
+
+
+11/22/2024
+Data for ./Experiments/Experiment1.json:
+Key: o
+Response Time: 0.9955840000002354
+Correct: Yes 
+
+Key: o
+Response Time: 0.9954402000003029
+Correct: Yes 
+
+ Key: o
+Response Time: 0.9941737000008288
+Correct: No
+
+ Key: o
+Response Time: 0.9086132000011276
+Correct: No
+
+Key: p
+Response Time: 0.856781399997999
+Correct: Yes
+
+
+11/22/2024
+Data for ./Experiments/Experiment1.json:
+Key: o
+Response Time: 0.8456248000002233
+Correct: Yes 
+
+Key: p
+Response Time: 0.8076939999991737
+Correct: Yes
+
+ Key: o
+Response Time: 0.8416217000012693
+Correct: No
+
+Key: o
+Response Time: 0.9713474999989558
+Correct: Yes 
+
+ Key: o
+Response Time: 1.1257243000000017
+Correct: No
+
+
+11/22/2024
+Data for ./Experiments/Experiment1.json:
+Key: o
+Response Time: 0.8923394000012195
+Correct: Yes 
+
+Key: o
+Response Time: 0.9628416999985348
+Correct: Yes 
+
+Key: o
+Response Time: 0.8650419999976293
+Correct: Yes 
+
+ Key: o
+Response Time: 0.962719899998774
+Correct: No
+
+Key: o
+Response Time: 0.915441599998303
+Correct: Yes 
+
+
+11/22/2024
+Data for ./Experiments/Experiment1.json:
+ Key: o
+Response Time: 0.6032741999988502
+Correct: No
+
+ Key: o
+Response Time: 0.291230099999666
+Correct: No
+
+ Key: o
+Response Time: 0.3725358999981836
+Correct: No
+
+ Key: o
+Response Time: 0.24411959999997634
+Correct: No
+
+Key: o
+Response Time: 0.1760751000001619
+Correct: Yes 
+
+
+11/22/2024
+Data for ./Experiments/Experiment1.json:
+Key: o
+Response Time: 0.8016171999988728
+Correct: Yes 
+
+Key: o
+Response Time: 0.4791283000013209
+Correct: Yes 
+
+Key: o
+Response Time: 0.5625772000021243
+Correct: Yes 
+
+Key: p
+Response Time: 0.44996509999691625
+Correct: Yes
+
+Key: o
+Response Time: 0.4653098000017053
+Correct: Yes 

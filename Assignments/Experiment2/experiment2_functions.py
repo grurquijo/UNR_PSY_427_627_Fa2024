@@ -75,8 +75,10 @@ def find_files(path:str, empty_list:list, file_name:list) -> list:
 
 # (2) Collect responses
 
-def check_keypress(quit_list:list, key_in, win):#key_response:list, 
-    if key_in == 'none':
+def check_keypress(quit_list:list, key_in, win):
+    if key_in is None:
+        pass
+    elif key_in == 'none':
         print('timed out')
     elif key_in in quit_list:
         print('\033[92m Exiting experiment \033[0m')
