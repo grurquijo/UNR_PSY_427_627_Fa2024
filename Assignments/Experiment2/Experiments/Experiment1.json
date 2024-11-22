@@ -6,8 +6,8 @@
     "Screen color": "0.5,0.5,0.5",
     "Number of trials": 5,
     "Number of matches": 2,
-    "Category names": "car,body",
+    "Category names": "body,car",
     "Stimulus duration (s)": ".1",
-    "Max wait time (s)": 15
+    "Max wait time (s)": "5"
   }
 }

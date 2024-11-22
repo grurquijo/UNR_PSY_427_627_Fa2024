@@ -80,6 +80,8 @@ def check_keypress(quit_list:list, key_in, win):#key_response:list,
         print('timed out')
     elif key_in in quit_list:
         print('\033[92m Exiting experiment \033[0m')
+        win.saveFrameIntervals()
+        win.saveMovieFrames(fileName='./ExperimentMovie.mp4')
         win.close()
         raise
     else: 
@@ -92,7 +94,8 @@ def screen_setup(screen_size:list, screen_color:any=(0.5,0.5,0.5), fullscreen:bo
     if fullscreen is True:
         win = visual.Window(color=screen_color,
                             fullscr=True,
-                            units='pix',)
+                            units='pix',
+                            )
     else:
         win = visual.Window(size=screen_size,
                             color=screen_color,
@@ -116,6 +119,14 @@ def randomize_matches(size, percent_match):
     '''
     match_array = np.random.choice([True,False], size=size, p=[percent_match, 1-percent_match])
     return match_array
+
+def fix_saved_video_frame_rate(key_pressed, win, frame_rate:float=(1/30)):
+    _, key_time = key_pressed[0]
+    num_rpt = frame_rate * key_time
+    num_rpt_rnd = np.round(num_rpt)
+    for i in range(int(num_rpt_rnd)):
+        win.getMovieFrame()
+    return win.getMoveFrame()
 # Inputs should be:
 
 # screen size
@@ -150,12 +161,14 @@ def trial(repeat:bool, stim:list, stim_duration: float, win, fixation):
     img2.draw()
     
     win.flip()
+    x = win.getMovieFrame()
     fixation.draw()
     core.wait(stim_duration)
     win.flip()
+    x = win.getMovieFrame()
     # response = event.waitKeys(maxWait=max_wait,
     #                                       timeStamped=True, 
     #                                       clearEvents=True,), max_wait
     
-    # return response
+    return x
 # You should write your code to be flexible enough to quickly implement a change in image directory (to show other same/different images). That will be your next assignment!

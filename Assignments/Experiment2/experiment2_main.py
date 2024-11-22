@@ -53,7 +53,8 @@ print('Stimuli collected')
 # Set up window for experiment, set quit keys, and begin checking for quit key press
 key_quit = ['escape', 'q']
 win = screen_setup(screen_size=screen_size, fullscreen=fullscreen, screen_color=screen_color)
-
+win.recordFrameIntervals = True
+framerate = win.monitorFramePeriod
 
 # Experiment description and instructions
 exp2_message = visual.TextStim(win, text='In this experiment, you will be comparing two images side by side and determining if they are the same or different.'
@@ -62,8 +63,17 @@ exp2_message = visual.TextStim(win, text='In this experiment, you will be compar
                 '\n\nPress any key to continue.')
 exp2_message.draw()
 win.flip()
-key_pressed = event.waitKeys(clearEvents=True)
-check_keypress(quit_list=key_quit, key_in=key_pressed[0], win=win)
+testone = win.getMovieFrame()
+key_pressed= event.waitKeys(clearEvents=True, timeStamped=True)
+check_keypress(quit_list=key_quit, key_in=key_pressed, win=win)
+_, key_time = key_pressed[0]
+num_rpt = (1/30) * key_time
+num_rpt_rnd = np.round(num_rpt)
+for i in range(int(num_rpt_rnd)):
+    win.getMovieFrame()
+
+#y_me = fix_saved_video_frame_rate(key_pressed=key_pressed, win=win)
+
 
 # Grabbing preferred response key
 keys_equal = True
@@ -81,12 +91,14 @@ while keys_equal:
     message.setAutoDraw(False)
     message.draw()
     win.flip()
+    win.getMovie_frame()
     key_pressed = event.waitKeys(clearEvents=True)
     check_keypress(quit_list=key_quit, key_in=key_pressed[0], win=win)
     
     message.setText('Choose a response key for "same".')
     message.draw()
     win.flip()
+    win.getMovie_frame()
     key_same = event.waitKeys(clearEvents=True)
     participant_keys.append(key_same[0])
     check_keypress(quit_list=key_quit, key_in=key_same[0], win=win)#key_response=[],
@@ -94,6 +106,7 @@ while keys_equal:
     message.setText('Choose a response key for "different".')
     message.draw()
     win.flip()
+    win.getMovieFrame()
     key_different = event.waitKeys(clearEvents=True)
     participant_keys.append(key_different[0])
     check_keypress(quit_list=key_quit, key_in=key_different[0], win=win)#key_response=[]
@@ -112,12 +125,14 @@ while keys_equal:
         message.draw()
         print('response = response')
         win.flip()
+        win.getMovieFrame()
         key_pressed = event.waitKeys(clearEvents=True)
         check_keypress(quit_list=key_quit, key_in=key_pressed, win=win)
         pass
     else:
         print('Response keys set')
         win.flip()
+        win.getMovieFrame()
         keys_equal = False
 
 # open up txt file to log responses(correct/incorrect), and responses
@@ -161,6 +176,7 @@ for i in range(trial_num):
                   '\nCorrect: Yes \n')
         fixation_correct.draw()
         win.flip()
+        win.getMovieFrame()
         core.wait(1)
     elif (key == participant_keys[1]) and (img_repeat == False):
         fid.write('\nKey: '+key+
@@ -168,6 +184,7 @@ for i in range(trial_num):
                   '\nCorrect: Yes\n')
         fixation_correct.draw()
         win.flip()
+        win.getMovieFrame()
         core.wait(1)
     else:
         fid.write('\n Key: '+key+
@@ -175,8 +192,11 @@ for i in range(trial_num):
                   '\nCorrect: No\n')
         fixation_incorrect.draw()
         win.flip()
+        win.getMovieFrame()
         core.wait(1)
-
+print(win.monitorFramePeriod)
+win.saveFrameIntervals()
+win.saveMovieFrames(fileName='./ExperimentMovie.mp4')
 fid.close()    
 win.close()
 core.quit()
