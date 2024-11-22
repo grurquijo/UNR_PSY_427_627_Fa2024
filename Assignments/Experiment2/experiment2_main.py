@@ -7,7 +7,8 @@ import datetime
 import psychopy
 import numpy as np
 
-from moviepy.editor import *
+from moviepy.video import VideoClip
+import moviepy.editor as mpy
 
 from psychopy import visual, core, event
 from experiment2_functions import *
@@ -212,25 +213,20 @@ for i in range(trial_num):
         win.getMovieFrame()
         core.wait(1)
 win.flip()
+
 frame_times = [i for i in win.frameIntervals]
 frame_images = [np.array(i) for i in win.movieFrames]
-images_array = []
-for i,idx in enumerate(frame_images):
-    print(i, idx)
-    
-    images_array.append(np.array(idx))
-frame_tuples = list(zip(images_array, frame_times))
-# test = VideoClip(make_frame, duration=)
-# final_clip = concatenate_videoclips(exp_clips)
-# final_clip.write_videofile('./testing.mp4', fps=30)
-#exp_clips = np.array(exp_clips)
-clip = ImageSequenceClip(np.array(frame_tuples), fps=30)
-clip.write_videofile('./anothertest.mp4')
-print(str(len(win.movieFrames)))
-print(str(len(win.frameIntervals)))
-#look at ImageClip.setduration
-win.saveFrameIntervals(fileName='./experimentframetest.json')
-win.saveMovieFrames(fileName='./ExperimentMovie.mp4')
+images_list = []
+for i in frame_images:
+    images_list.append(np.array(i))
+
+# look at editor.ImageClip?
+clip_list = [mpy.ImageClip(img, duration=dur) for img, dur in zip(images_list, frame_times)]
+exp_clips = mpy.concatenate_videoclips(clip_list)
+exp_clips.write_videofile('./experiment_recording.mp4', fps=30)
+
+win.saveFrameIntervals(fileName='./experimentframetest.txt')
+#win.saveMovieFrames(fileName='./ExperimentMovie.mp4')
 fid.close()    
 win.close()
 core.quit()
