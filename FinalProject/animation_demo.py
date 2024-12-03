@@ -37,6 +37,7 @@ n_frames = 30
 size = 101
 fps = 30
 spatial_frequencies = np.linspace(1, 10, n_frames)
+ch_orientation = np.linspace(0,360,n_frames)
 
 fig, axs = plt.subplots(figsize=(5,5), )
 im = axs.imshow(grating(size, spatial_frequencies[0]))
@@ -44,6 +45,7 @@ gg = [grating(size, freq=spatial_frequencies[i]) for i in range(n_frames)]
 
 # Define update function (to change the plot on each frame)
 def grating_anim(i):
+    gg=grating(size,freq=spatial_frequencies[i])
     im.set_array(gg[i])
     return (im,)
 
