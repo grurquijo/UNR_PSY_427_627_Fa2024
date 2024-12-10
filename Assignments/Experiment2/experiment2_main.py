@@ -213,7 +213,8 @@ for i in range(trial_num):
         win.getMovieFrame()
         core.wait(1)
 win.flip()
-
+fid.close()    
+win.close()
 frame_times = [i for i in win.frameIntervals]
 frame_images = [np.array(i) for i in win.movieFrames]
 images_list = []
@@ -227,6 +228,5 @@ exp_clips.write_videofile('./experiment_recording.mp4', fps=30)
 
 win.saveFrameIntervals(fileName='./experimentframetest.txt')
 #win.saveMovieFrames(fileName='./ExperimentMovie.mp4')
-fid.close()    
-win.close()
+
 core.quit()

@@ -119,7 +119,8 @@ def randomize_matches(size, percent_match):
     size: number of trials
     percent_match: percentage of trials you want to match as a decimal >> 0.25 for 25%
     '''
-    match_array = np.random.choice([True,False], size=size, p=[percent_match, 1-percent_match])
+    true_false = [True,False]
+    match_array = np.random.choice(true_false, size=size, p=[percent_match, 1-percent_match])
     return match_array
 
 def fix_saved_video_frame_rate(key_pressed, win, frame_rate:float=(1/30)):
