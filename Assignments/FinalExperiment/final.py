@@ -78,17 +78,17 @@ ani.save('./dot_on_gaussian_dist.mp4', writer='ffmpeg')
 # %%
 fig, axs = plt.subplots()
 
-# set up plot
+# set up plot preferences and meshgrid for gaussian
 plt.tick_params(left=False, right=False, bottom=False, labelleft=False, labelbottom=False)
 t = np.linspace(-1, 1, 100)
 x, y = np.meshgrid(t, t)
 
-# sin wave for blob pulse speed
+# set up sin wave for blob pulse speed
 freq = 1
 u = np.linspace(0, 2 * np.pi, 100)
 v = np.abs(np.sin(freq * u))
 
-# calculate the guassian
+# function to calculate the guassian at blob sin speed
 def make_gauss(mu_x, mu_y, sigma, x=x, y=y):
     g = np.e**(-((x - mu_x)**2 + (y-mu_y)**2)/(2*sigma**2))
     return g
