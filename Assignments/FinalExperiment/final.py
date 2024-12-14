@@ -20,7 +20,7 @@ num = np.linspace(.25,1,15)
 cmap = mpl.colormaps.get_cmap('coolwarm')
 c_g = cmap(num)
 
-# set up constants
+# set up the values that won't change for the gaussian
 resolution = 100
 amplitude = 6
 x = np.linspace(-3,3,resolution)
@@ -36,7 +36,7 @@ for k,j in enumerate(num):
 #%%
 fig, axs = plt.subplots()
 
-# set bell curve
+# create gaussian distribution
 resolution = 101
 amplitude = 1
 t_star = np.linspace(-3,3,resolution)
@@ -54,8 +54,6 @@ u = np.linspace(0, 2 * np.pi, resolution)
 v = -3 * np.sin(freq * u)
 
 # gaussian path dot travels on using the sin wave results
-mu = 0
-sigma = .75
 z = amplitude * np.e ** -(((1/2) * v - mu) / (sigma))**2
 
 # set the dot
@@ -113,3 +111,6 @@ ani.save('./gaussian_pulse.mp4', writer='ffmpeg')
 
 # ======================================================================================= 
 # %%
+# divide the data into chunks and take the fourier transform of the chunks
+x = np.random.randint(-1,1)
+y = np.random.randint(-1,1)
